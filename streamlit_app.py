@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import joblib
 from Bio import Entrez, SeqIO
+import torch
+from transformers import BertTokenizer, BertModel, BioGptTokenizer, BioGptModel, BigBirdTokenizer, BigBirdModel
 
 # Solvent mapping
 solvent_mapping = {
@@ -74,9 +76,6 @@ def encode_used_part(part):
 
 # Prediction function with lazy loading of transformer models
 def predict(its2_sequence, solvent1, solvent2, ratio1, ratio2, used_parts):
-    import torch
-    from transformers import BertTokenizer, BertModel, BioGptTokenizer, BioGptModel, BigBirdTokenizer, BigBirdModel
-
     # Load pre-trained models and tokenizers
     tokenizer_dnabert = BertTokenizer.from_pretrained("zhihan1996/DNA_bert_6")
     model_dnabert = BertModel.from_pretrained("zhihan1996/DNA_bert_6")
